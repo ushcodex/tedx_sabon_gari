@@ -231,3 +231,22 @@
     font-size: 13px;
   }
 }
+
+
+@media (max-width: 767px) {
+    .navbar-brand img {
+        max-width: 150px !important; 
+        height: auto;
+    }
+    .head-title img{
+      max-width: 300px !important;
+      height: auto;
+    }
+    .definition{
+      font-size: large;
+      margin-top: 5px;
+    }
+    .navbar{
+      margin-top: 5px;
+        }
+}
