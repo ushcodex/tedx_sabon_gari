@@ -53,8 +53,11 @@
                 Speaker
               </a>
             </li>
-
-
+            <li>
+              <div class="banner-btn">
+                <a href="#" class="btn btn-common">Get Ticket</a>
+              </div>
+            </li>
 
 
           </ul>
@@ -76,9 +79,9 @@
               <p class="banner-desc">
                 a proudly licensed local TEDx event committed to spreading powerful ideas and inspiring change in our
                 community and beyond</p>
-              <div class="banner-btn">
+              <!-- <div class="banner-btn">
                 <a href="#" class="btn btn-common">Get Ticket</a>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -155,7 +158,7 @@
               <i class="lni-mic"></i>
             </div>
             <div class="counter-content">
-              <div class="counterUp">0</div>
+              <div class="counterUp">20</div>
               <p>Spekers</p>
             </div>
           </div>
@@ -167,7 +170,7 @@
               <i class="lni-bulb"></i>
             </div>
             <div class="counter-content">
-              <div class="counterUp">0</div>
+              <div class="counterUp">200</div>
               <p>Seats</p>
             </div>
           </div>
@@ -179,8 +182,8 @@
               <i class="lni-briefcase"></i>
             </div>
             <div class="counter-content">
-              <div class="counterUp">0</div>
-              <p>Sponsors</p>
+              <div class="counterUp">5</div>
+              <p>Partners</p>
             </div>
           </div>
         </div>
@@ -191,7 +194,7 @@
               <i class="lni-coffee-cup"></i>
             </div>
             <div class="counter-content">
-              <div class="counterUp">0</div>
+              <div class="counterUp">20</div>
               <p>Sessions</p>
             </div>
           </div>
@@ -204,10 +207,39 @@
   <!-- Team Section Start -->
   <section id="speakers" class="section-padding text-center coming-soon-section">
     <div class="container">
-      <div class="coming-soon-card">
-        <h2 class="section-title">Speakers</h2>
-        <div class="coming-soon-anim" aria-hidden="true"><span>COMING SOON</span></div>
-        <p class="coming-soon-note">We’re preparing an exciting lineup. This section will be here soon — stay tuned.</p>
+      <div class="section-header text-center">
+        <h2 class="section-title wow fadeInDown" data-wow-delay="0.3s">Meet Our Keynote Speakers</h2>
+        <div class="shape wow fadeInDown" data-wow-delay="0.3s"></div>
+      </div>
+      <div class="row">
+        <!-- Speaker 1 -->
+        <div class="col-lg-4 col-md-6 col-xs-12">
+          <div class="speaker-item wow fadeInUp" data-wow-delay="0.2s">
+            <div class="img-thumb">
+              <img src="assets/img/speaker/keynote-1.jpg" alt="Keynote Speaker 1" class="img-fluid">
+            </div>
+          </div>
+        </div>
+        <!-- Speaker 2 -->
+        <div class="col-lg-4 col-md-6 col-xs-12">
+          <div class="speaker-item wow fadeInUp" data-wow-delay="0.4s">
+            <div class="img-thumb">
+              <img src="assets/img/speaker/keynote-2.jpg" alt="Keynote Speaker 2" class="img-fluid">
+            </div>
+          </div>
+        </div>
+        <!-- Speaker 3 -->
+        <div class="col-lg-4 col-md-6 col-xs-12">
+          <div class="speaker-item wow fadeInUp" data-wow-delay="0.6s">
+            <div class="img-thumb">
+              <img src="assets/img/speaker/keynote-3.jpg" alt="Keynote Speaker 3" class="img-fluid">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-5 wow fadeInUp" data-wow-delay="0.8s">
+        <a href="#" class="btn btn-common disabled-link"
+          style="opacity: 0.6; cursor: not-allowed; pointer-events: none;">See All Speakers</a>
       </div>
     </div>
   </section>
@@ -215,29 +247,153 @@
 
 
 
-  <!-- Ticket Pricing Area Start -->
-  <section id="pricing" class="section-padding text-center coming-soon-section coming-soon-pricing">
+  <!-- Tickets Section -->
+  <section class="tickets" id="tickets">
     <div class="container">
-      <div class="coming-soon-card">
-        <h2 class="section-title">Ticket Pricing</h2>
-        <div class="coming-soon-anim pill-pricing" aria-hidden="true"><span>COMING SOON</span></div>
-        <p class="coming-soon-note">Ticketing details are being finalised. Check back soon for pricing and options.</p>
+      <div class="section-header">
+        <div class="header-line"></div>
+        <h2>Get Your Ticket</h2>
       </div>
-    </div>
-  </section>
-  <!-- Ticket Pricing Area End -->
+      <p class="section-subtitle">Choose your ticket tier and join us for an unforgettable experience of ideas worth
+        spreading.</p>
 
-  <!-- Sponsors Section Start -->
-  <section id="sponsors" class="section-padding text-center coming-soon-section coming-soon-sponsors">
-    <div class="container">
-      <div class="coming-soon-card">
-        <h2 class="section-title">Sponsors</h2>
-        <div class="coming-soon-anim pill-sponsors" aria-hidden="true"><span>COMING SOON</span></div>
-        <p class="coming-soon-note">Sponsorship details will appear here. We're curating partners — stay tuned.</p>
+      <!-- Ticket Cards -->
+      <div class="tickets-grid">
+        <!-- Early Bird -->
+        <div class="ticket-card" data-ticket="early-bird">
+          <div class="ticket-content">
+            <h3 class="ticket-name">Early Bird</h3>
+            <p class="ticket-description">Limited early access</p>
+            <div class="ticket-price">
+              <span class="price">₦5,000</span>
+              <span class="original-price">₦8,000</span>
+            </div>
+            <ul class="ticket-features">
+              <li><span class="checkmark">✓</span> General admission</li>
+              <li><span class="checkmark">✓</span> Lunch & refreshments</li>
+              <li><span class="checkmark">✓</span> Networking session</li>
+              <li><span class="checkmark">✓</span> Event materials</li>
+            </ul>
+            <button class="btn btn-primary w-full ticket-select-btn">Select Ticket</button>
+          </div>
+        </div>
+
+        <!-- Standard (Featured) -->
+        <div class="ticket-card featured" data-ticket="standard">
+          <div class="featured-badge">MOST POPULAR</div>
+          <div class="ticket-content">
+            <h3 class="ticket-name">Standard</h3>
+            <p class="ticket-description">Full event access</p>
+            <div class="ticket-price">
+              <span class="price">₦8,000</span>
+            </div>
+            <ul class="ticket-features">
+              <li><span class="checkmark">✓</span> General admission</li>
+              <li><span class="checkmark">✓</span> Lunch & refreshments</li>
+              <li><span class="checkmark">✓</span> Networking session</li>
+              <li><span class="checkmark">✓</span> Event materials</li>
+              <li><span class="checkmark">✓</span> Certificate</li>
+            </ul>
+            <button class="btn btn-light w-full ticket-select-btn">Select Ticket</button>
+          </div>
+        </div>
+
+        <!-- VIP -->
+        <div class="ticket-card" data-ticket="vip">
+          <div class="ticket-content">
+            <h3 class="ticket-name">VIP</h3>
+            <p class="ticket-description">Premium experience</p>
+            <div class="ticket-price">
+              <span class="price">₦15,000</span>
+            </div>
+            <ul class="ticket-features">
+              <li><span class="checkmark">✓</span> VIP seating</li>
+              <li><span class="checkmark">✓</span> Premium lunch</li>
+              <li><span class="checkmark">✓</span> Exclusive networking</li>
+              <li><span class="checkmark">✓</span> Event materials</li>
+              <li><span class="checkmark">✓</span> Certificate</li>
+              <li><span class="checkmark">✓</span> Meet & greet with speakers</li>
+            </ul>
+            <button class="btn btn-primary w-full ticket-select-btn">Select Ticket</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Checkout Section -->
+      <div class="checkout-section" id="checkoutSection">
+        <h3>Confirm Registration & Upload Receipt</h3>
+        <form class="checkout-form" id="checkoutForm">
+          <div class="form-row">
+            <input type="text" placeholder="First Name" required>
+            <input type="text" placeholder="Last Name" required>
+          </div>
+          <input type="email" placeholder="Email Address" required>
+          <input type="tel" placeholder="Phone Number" required>
+          <div class="form-group">
+            <label for="receiptUpload" style="color: #ccc; font-size: 14px; margin-bottom: 8px; display: block;">Upload
+              Payment Receipt</label>
+            <input type="file" id="receiptUpload" class="form-control-file" accept="image/*,.pdf"
+              style="padding: 10px 0; background: transparent; border: none; color: #fff;" required>
+          </div>
+          <button type="submit" class="btn btn-primary w-full">Proceed to Payment</button>
+        </form>
       </div>
     </div>
   </section>
-  <!-- Sponsors Section End -->
+
+  <!-- Partners Section Start -->
+  <section id="partners" class="section-padding">
+    <div class="container">
+      <div class="section-header text-center">
+        <h2 class="section-title wow fadeInDown" data-wow-delay="0.3s">Our Partners</h2>
+        <div class="shape wow fadeInDown" data-wow-delay="0.3s"></div>
+      </div>
+      <div class="partners-slider">
+        <div class="partners-track">
+          <!-- Slide Set 1 -->
+          <div class="partner-slide">
+            <img src="assets/img/partners/partner-1.jpg" alt="Partner 1">
+          </div>
+          <div class="partner-slide">
+            <img src="assets/img/partners/partner-2.jpg" alt="Partner 2">
+          </div>
+          <div class="partner-slide">
+            <img src="assets/img/partners/partner-3.jpg" alt="Partner 3">
+          </div>
+          <div class="partner-slide">
+            <img src="assets/img/partners/partner4.PNG" alt="Partner 4">
+          </div>
+          <!-- Slide Set 2 (Duplicate for loop) -->
+          <div class="partner-slide">
+            <img src="assets/img/partners/partner-1.jpg" alt="Partner 1">
+          </div>
+          <div class="partner-slide">
+            <img src="assets/img/partners/partner-2.jpg" alt="Partner 2">
+          </div>
+          <div class="partner-slide">
+            <img src="assets/img/partners/partner-3.jpg" alt="Partner 3">
+          </div>
+          <div class="partner-slide">
+            <img src="assets/img/partners/partner4.PNG" alt="Partner 4">
+          </div>
+          <!-- Slide Set 3 (Duplicate for safety/smoother loop) -->
+          <div class="partner-slide">
+            <img src="assets/img/partners/partner-1.jpg" alt="Partner 1">
+          </div>
+          <div class="partner-slide">
+            <img src="assets/img/partners/partner-2.jpg" alt="Partner 2">
+          </div>
+          <div class="partner-slide">
+            <img src="assets/img/partners/partner-3.jpg" alt="Partner 3">
+          </div>
+          <div class="partner-slide">
+            <img src="assets/img/partners/partner4.PNG" alt="Partner 4">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Partners Section End -->
 
   <!-- Contact text Start -->
   <section id="contact-text">

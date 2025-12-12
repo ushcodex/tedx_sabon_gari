@@ -102,7 +102,7 @@ ol li {
 }
 
 .section-title-header p {
-  text: center;
+  text-align: center;
   font-weight: 400;
   line-height: 26px;
   padding-bottom: 36px;
@@ -133,7 +133,7 @@ ol li {
 
 .section-subcontent {
   font-size: 16px;
-  text: center;
+  text-align: center;
   font-weight: 400;
   line-height: 26px;
   padding-bottom: 36px;
@@ -170,7 +170,7 @@ ol li {
 .inner-title {
   font-size: 24px;
   font-weight: 700;
-  text-tranform: capitalize;
+  text-transform: capitalize;
 }
 
 .page-tagline {
@@ -2568,4 +2568,430 @@ footer {
 
 #speakers .coming-soon-anim {
   color: #ffffff !important;
+}
+
+/* Tickets Section Styling */
+.tickets {
+  background-color: #000;
+  padding: 80px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.tickets .section-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.tickets .section-header h2 {
+  color: #fff;
+}
+
+.tickets .section-subtitle {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 60px;
+  color: #ccc;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Tickets Grid */
+.tickets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-bottom: 60px;
+  padding: 20px 0;
+}
+
+/* Ticket Card */
+.ticket-card {
+  background: #111;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  border: 1px solid #333;
+  display: flex;
+  flex-direction: column;
+}
+
+.ticket-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(255, 255, 255, 0.1);
+}
+
+.ticket-card.featured {
+  background: #E4002B;
+  border: 2px solid #E4002B;
+  transform: scale(1.05);
+  /* Slight scale for emphasis */
+  z-index: 2;
+  box-shadow: 0 15px 35px rgba(228, 0, 43, 0.3);
+}
+
+.ticket-card.featured:hover {
+  transform: scale(1.05) translateY(-10px);
+  box-shadow: 0 25px 50px rgba(228, 0, 43, 0.4);
+}
+
+.featured-badge {
+  background: #000;
+  color: #fff;
+  text-align: center;
+  padding: 8px 0;
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.ticket-content {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.ticket-name {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.ticket-description {
+  color: #ddd;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.ticket-price {
+  margin-bottom: 25px;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.ticket-price .price {
+  font-size: 32px;
+  font-weight: 800;
+  color: #fff;
+  /* Make price white on all cards for visibility */
+}
+
+/* On standard card, price is already visible on red bg */
+.ticket-card.featured .ticket-price .price {
+  color: #fff;
+}
+
+.ticket-card:not(.featured) .ticket-price .price {
+  color: #E4002B;
+  /* Red price on black cards to pop */
+}
+
+
+.ticket-price .original-price {
+  font-size: 16px;
+  text-decoration: line-through;
+  color: #999;
+}
+
+.ticket-card.featured .ticket-price .original-price {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+
+.ticket-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 30px 0;
+  flex-grow: 1;
+}
+
+.ticket-features li {
+  margin-bottom: 12px;
+  color: #eee;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+
+.ticket-features .checkmark {
+  color: #E4002B;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.ticket-card.featured .ticket-features .checkmark {
+  color: #fff;
+}
+
+.ticket-select-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 14px;
+  border: none;
+}
+
+.ticket-select-btn.btn-primary {
+  background-image: linear-gradient(65deg, #E4002B 0, #C7001E 100%);
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(228, 0, 43, 0.2);
+}
+
+.ticket-select-btn.btn-primary:hover {
+  box-shadow: 0 8px 20px rgba(228, 0, 43, 0.4);
+}
+
+.ticket-select-btn.btn-light {
+  background: #fff;
+  color: #E4002B;
+  border: 1px solid #fff;
+}
+
+.ticket-select-btn.btn-light:hover {
+  background: #f1f1f1;
+  color: #C7001E;
+}
+
+/* Utilities */
+.w-full {
+  width: 100%;
+}
+
+/* Checkout Section */
+.checkout-section {
+  background: #1a1a1a;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+  max-width: 600px;
+  margin: 0 auto;
+  border-top: 4px solid #E4002B;
+  color: #fff;
+}
+
+.checkout-section .btn-primary {
+  background: #E4002B !important;
+  /* Force flat red */
+  background-image: none !important;
+  color: #fff;
+  width: 100%;
+  /* Ensure full width */
+  border: none;
+}
+
+.checkout-section .btn-primary:hover {
+  background: #C7001E !important;
+  box-shadow: 0 5px 15px rgba(228, 0, 43, 0.4);
+}
+
+.checkout-section h3 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.checkout-form input {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  border: 1px solid #444;
+  background: #333;
+  color: #fff;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.checkout-form input::placeholder {
+  color: #aaa;
+}
+
+.checkout-form input:focus {
+  border-color: #E4002B;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(228, 0, 43, 0.2);
+}
+
+.form-row {
+  display: flex;
+  gap: 20px;
+}
+
+.form-row input {
+  flex: 1;
+  /* Allow inputs to share space equally */
+  width: auto;
+  /* Reset width to allow flex to control size */
+}
+
+@media (max-width: 991px) {
+  .ticket-card.featured {
+    transform: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .tickets-grid {
+    grid-template-columns: 1fr;
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .ticket-card.featured {
+    transform: none;
+    margin: 20px 0;
+    /* Add some spacing if stacked */
+  }
+
+  .ticket-card.featured:hover {
+    transform: translateY(-5px);
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+.form-row {
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Speaker Item Styling */
+.speaker-item {
+  margin-bottom: 30px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+}
+
+#speakers .section-title {
+  color: #fff;
+  width: 100%;
+  max-width: 100%;
+}
+
+.speaker-item .img-thumb img {
+  width: 100%;
+  height: 450px;
+  /* Increased height */
+  object-fit: cover;
+  /* Prevent distortion */
+  transition: all 0.3s ease-in-out;
+}
+
+.speaker-item:hover .img-thumb img {
+  transform: scale(1.1);
+}
+
+/* Fix for Banner Button in Navbar */
+.navbar-nav .banner-btn {
+  margin-top: 5px;
+  /* Push down slightly to align with text */
+  margin-left: 15px;
+  /* Spacing from last text item */
+}
+
+@media(max-width: 991px) {
+  .navbar-nav .banner-btn {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+}
+
+
+
+@media (max-width: 991px) {
+  .btn-navbar-ticket {
+    margin-left: 0;
+    margin-top: 10px;
+    display: inline-block;
+    /* Ensure it respects padding/margins */
+    text-align: center;
+  }
+}
+
+/* Partners Slider */
+#partners {
+  background: #000;
+  /* User requested Black */
+  overflow: hidden;
+  /* Hide scrollbar */
+}
+
+#partners .section-title {
+  color: #fff;
+  /* User requested White */
+}
+
+/* Slider Container */
+.partners-slider {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  padding: 40px 0;
+}
+
+/* Track moves horizontally */
+.partners-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  /* Ensure it stretches */
+  animation: scroll 30s linear infinite;
+  /* Smooth continuous scroll */
+}
+
+/* Individual Slide */
+.partner-slide {
+  margin: 0 50px;
+  /* Space between logos */
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.partner-slide img {
+  height: 200px;
+  /* Increased from 120px */
+  width: auto;
+  max-width: none;
+  object-fit: contain;
+  filter: none;
+  /* Original colors */
+  opacity: 1;
+  transition: transform 0.3s;
+}
+
+/* Optional: Slight pop on hover if desired, but user asked for "static" interactivity implies no color shift.
+   We can just scale slightly for tactile feel or leave completely static. 
+   User said "remove the howver make it static", so no hover effects. */
+
+/* Keyframes for Marquee */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-33.33%);
+    /* Move 1/3 since we have 3 sets of 4 images */
+  }
 }
