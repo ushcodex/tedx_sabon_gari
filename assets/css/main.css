@@ -2867,10 +2867,7 @@ footer {
   }
 }
 
-.form-row {
-  flex-direction: column;
-  gap: 0;
-}
+
 
 /* Speaker Item Styling */
 .speaker-item {
