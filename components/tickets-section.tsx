@@ -16,6 +16,8 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import Script from "next/script"
+import { ticketTiers } from "@/lib/content"
+import { PaymentSuccessView } from "@/components/payment-success-view"
 
 // Declare PaystackPop on window
 declare global {
@@ -23,52 +25,6 @@ declare global {
     PaystackPop: any
   }
 }
-
-const ticketTiers = [
-  {
-    name: "Promo",
-    price: "₦5,000",
-    rawPrice: 5000,
-    description: "Limited early access",
-    features: [
-      "General admission",
-      "Lunch & refreshments",
-      "Networking session",
-      "Event materials",
-      "Certificate",
-    ],
-    popular: false,
-  },
-  {
-    name: "Standard",
-    price: "₦7,000",
-    rawPrice: 7000,
-    description: "Full event access",
-    features: [
-      "General admission",
-      "Lunch & refreshments",
-      "Networking session",
-      "Event materials",
-      "Certificate",
-    ],
-    popular: true,
-  },
-  {
-    name: "VIP",
-    price: "₦10,000",
-    rawPrice: 10000,
-    description: "Premium experience",
-    features: [
-      "VIP seating",
-      "Premium lunch",
-      "Exclusive networking",
-      "Event materials",
-      "Certificate",
-      "Meet & greet with speakers",
-    ],
-    popular: false,
-  },
-]
 
 export function TicketsSection() {
   const [selectedTier, setSelectedTier] = useState<(typeof ticketTiers)[0] | null>(null)

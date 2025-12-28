@@ -1,11 +1,5 @@
 import { Button } from "@/components/ui/button"
-
-const sponsors = [
-  { name: "Partner 1", logo: "/partners/partner-1.jpg" },
-  { name: "Partner 2", logo: "/partners/partner-2.jpg" },
-  { name: "Partner 3", logo: "/partners/partner-3.jpg" },
-  { name: "Partner 4", logo: "/partners/partner4.PNG" },
-]
+import { sponsors } from "@/lib/content"
 
 export function SponsorsSection() {
   return (

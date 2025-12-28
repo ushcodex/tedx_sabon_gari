@@ -1,40 +1,13 @@
+"use client"
+
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import Image from "next/image"
+import { useState } from "react"
+import { team } from "@/lib/content"
 
 export default function AboutPage() {
-  const team = [
-    {
-      name: "Usman Idris Abdullahi",
-      role: "Curator / Team Lead",
-      image: "/team/team-1.jpeg",
-    },
-    {
-      name: "Muhammad Kabeer",
-      role: "Project Management / Volunteer Lead",
-      image: "/team/team-2.jpeg",
-    },
-    {
-      name: "Dayyabu Abubakar Sadiq",
-      role: "Lead Guest Relations",
-      image: "/team/team-3.jpeg",
-    },
-    {
-      name: "Fatima Muhammad",
-      role: "Lead Content Creation",
-      image: "/team/team-4.jpeg",
-    },
-    {
-      name: "Bello Halima",
-      role: "Event Management Lead",
-      image: "/team/team-5.jpeg",
-    },
-    {
-      name: "Abubakar Saeed",
-      role: "Venue Management Lead",
-      image: "/team/team-6.jpeg",
-    },
-  ]
+  const [activeIndex, setActiveIndex] = useState<number | null>(null)
 
   return (
     <main className="min-h-screen bg-background">
@@ -91,10 +64,10 @@ export default function AboutPage() {
           </div>
 
           <div className="space-y-8 bg-zinc-900/30 p-10 rounded-3xl border border-primary/20">
-            <h3 className="text-3xl font-bold text-center">Theme: "Bridging the Gap"</h3>
+            <h3 className="text-3xl font-bold text-center">Theme: &quot;Bridging the Gap&quot;</h3>
             <p className="text-xl text-center text-muted-foreground italic max-w-2xl mx-auto">
-              "Our theme will explore ideas around social, economic, cultural, and technological divides and how
-              innovation, collaboration, and empathy can help us close those gaps."
+              &quot;Our theme will explore ideas around social, economic, cultural, and technological divides and how
+              innovation, collaboration, and empathy can help us close those gaps.&quot;
             </p>
           </div>
         </div>
@@ -113,14 +86,24 @@ export default function AboutPage() {
             {team.map((member, i) => (
               <div
                 key={i}
-                className="group bg-zinc-900 rounded-xl overflow-hidden border border-border hover:border-primary transition-all duration-300"
+                className={`group bg-zinc-900 rounded-xl overflow-hidden border border-border hover:border-primary transition-all duration-300 ${
+                  activeIndex === i ? "border-primary" : ""
+                }`}
+                onTouchStart={() => setActiveIndex(i)}
+                onTouchEnd={() => setActiveIndex(null)}
               >
-                <div className="aspect-[3/4] relative overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-500">
+                <div
+                  className={`aspect-[3/4] relative overflow-hidden transition-all duration-500 ${
+                    activeIndex === i ? "grayscale-0" : "grayscale group-hover:grayscale-0"
+                  }`}
+                >
                   <Image
                     src={member.image || "/placeholder.svg"}
                     alt={member.name}
                     fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    className={`object-cover transition-transform duration-500 ${
+                      activeIndex === i ? "scale-110" : "group-hover:scale-110"
+                    }`}
                   />
                 </div>
                 <div className="p-6 text-center">
