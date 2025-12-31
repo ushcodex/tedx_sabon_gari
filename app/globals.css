@@ -140,23 +140,3 @@
 .animate-pulse-glow {
   animation: pulse-glow 2s ease-in-out infinite;
 }
-
-/* Paystack iframe z-index fix - ensure it appears above dialog overlays */
-iframe[name*="paystack"],
-iframe[src*="paystack"],
-.paystack-iframe,
-#paystack-checkout,
-div[class*="paystack"] {
-  z-index: 999999 !important;
-  position: relative !important;
-}
-
-/* Ensure Radix Dialog doesn't block Paystack */
-[data-radix-dialog-overlay] {
-  z-index: 50 !important;
-}
-
-[data-radix-dialog-content] {
-  z-index: 51 !important;
-}
-
