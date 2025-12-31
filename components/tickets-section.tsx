@@ -19,7 +19,7 @@ import Script from "next/script"
 import { ticketTiers } from "@/lib/content"
 import { PaymentSuccessView } from "@/components/payment-success-view"
 
-// Declare PaystackPop on window
+// Declare PaystackPop on window to avoid TS errors
 declare global {
   interface Window {
     PaystackPop: any
@@ -40,20 +40,37 @@ export function TicketsSection() {
   }
 
   const handlePayment = async (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault() // Prevents the form from refreshing the page
     setIsProcessing(true)
 
-    // Split name into first and last
-    const names = formData.name.split(" ")
-    const firstName = names[0]
-    const lastName = names.slice(1).join(" ") || ""
+    // 1. Validation: Check for Public Key
+    const publicKey = process.env.NEXT_PUBLIC_PAYSTACK_KEY
+    if (!publicKey) {
+      alert("CRITICAL ERROR: Paystack Public Key is missing! Check Vercel Environment Variables.")
+      setIsProcessing(false)
+      return
+    }
 
-    // 1. Setup Paystack Popup
-    const handler = window.PaystackPop.setup({
-      key: process.env.NEXT_PUBLIC_PAYSTACK_KEY, // Uses Vercel Env Variable
+    // 2. Validation: Check Amount
+    const amountInKobo = (selectedTier?.rawPrice || 0) * 100
+    if (amountInKobo <= 0) {
+      alert("Error: Invalid Ticket Price")
+      setIsProcessing(false)
+      return
+    }
+
+    // Split name safely
+    const names = formData.name.split(" ")
+    const firstName = names[0] || "Guest"
+    const lastName = names.slice(1).join(" ") || "."
+
+    // 3. Setup Paystack Config
+    const paystackConfig = {
+      key: publicKey,
       email: formData.email,
-      amount: (selectedTier?.rawPrice || 0) * 100, // Amount in kobo
+      amount: amountInKobo,
       currency: "NGN",
+      ref: "" + Math.floor(Math.random() * 1000000000 + 1), // Generate unique ref manually
       metadata: {
         custom_fields: [
           {
@@ -78,42 +95,48 @@ export function TicketsSection() {
           },
         ],
       },
-      callback: async function (response: any) {
-        // 2. Payment Success on Frontend -> Now Verify on Backend
-        try {
-            const verifyReq = await fetch('/api/verify-payment', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ reference: response.reference }),
-            });
-            
-            const verifyData = await verifyReq.json();
-
-            if (verifyReq.ok && verifyData.status === 'success') {
-                // 3. Verification Success -> Show Success View
-                setSuccessData({
-                  reference: response.reference,
-                  amount: selectedTier?.rawPrice || 0,
-                  ticket: selectedTier?.name || "",
-                })
+      callback: function (response: any) {
+        // PAYMENT SUCCESSFUL ON FRONTEND -> NOW VERIFY ON SERVER
+        fetch("/api/verify-payment", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ reference: response.reference }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.status === "success") {
+              setSuccessData({
+                reference: response.reference,
+                amount: selectedTier?.rawPrice || 0,
+                ticket: selectedTier?.name || "",
+              })
             } else {
-                alert("Payment Verification Failed. Please contact support.")
+              alert("Payment Verification Failed. Please contact support.")
             }
-        } catch (error) {
-            console.error("Verification Error:", error);
+          })
+          .catch((err) => {
+            console.error("Verification Error:", err)
             alert("Network error verifying payment.")
-        } finally {
+          })
+          .finally(() => {
             setIsProcessing(false)
-        }
+          })
       },
       onClose: function () {
         setIsProcessing(false)
         alert("Transaction was not completed, window closed.")
       },
-    })
+    }
 
-    // 4. Open the Iframe
-    handler.openIframe()
+    // 4. Initialize Paystack
+    try {
+      const handler = window.PaystackPop.setup(paystackConfig)
+      handler.openIframe()
+    } catch (error) {
+      console.error("Paystack Init Error:", error)
+      alert("Could not load Paystack. Please refresh and try again.")
+      setIsProcessing(false)
+    }
   }
 
   const handleClose = () => {
@@ -124,7 +147,6 @@ export function TicketsSection() {
 
   return (
     <section id="tickets" className="py-24 bg-background relative overflow-hidden">
-      {/* Load Paystack Script */}
       <Script src="https://js.paystack.co/v1/inline.js" strategy="lazyOnload" />
 
       {/* Background decoration */}
@@ -283,4 +305,4 @@ export function TicketsSection() {
       </Dialog>
     </section>
   )
-        } 
+}
