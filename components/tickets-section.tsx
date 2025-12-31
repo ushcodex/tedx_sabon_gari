@@ -19,7 +19,6 @@ import Script from "next/script"
 import { ticketTiers } from "@/lib/content"
 import { PaymentSuccessView } from "@/components/payment-success-view"
 
-// Declare PaystackPop on window to avoid TS errors
 declare global {
   interface Window {
     PaystackPop: any
@@ -36,67 +35,60 @@ export function TicketsSection() {
   const handleTicketClick = (tier: (typeof ticketTiers)[0]) => {
     setSelectedTier(tier)
     setIsDialogOpen(true)
-    setSuccessData(null) // Reset success state
+    setSuccessData(null)
   }
 
-  const handlePayment = async (e: React.FormEvent) => {
-    e.preventDefault() // Prevents the form from refreshing the page
+  const handlePayment = async () => {
     setIsProcessing(true)
 
-    // 1. Validation: Check for Public Key
-    const publicKey = process.env.NEXT_PUBLIC_PAYSTACK_KEY
+    // --- DEBUGGING BLOCK ---
+    const publicKey = process.env.NEXT_PUBLIC_PAYSTACK_KEY;
+    const amountInKobo = (selectedTier?.rawPrice || 0) * 100;
+
+    console.log("PAYSTACK CONFIG CHECK:", {
+        key: publicKey,
+        email: formData.email,
+        amount: amountInKobo,
+        tier: selectedTier?.name
+    });
+
+    // 1. Validate Inputs
     if (!publicKey) {
-      alert("CRITICAL ERROR: Paystack Public Key is missing! Check Vercel Environment Variables.")
-      setIsProcessing(false)
-      return
+        alert("Configuration Error: Missing Paystack Public Key");
+        setIsProcessing(false);
+        return;
     }
-
-    // 2. Validation: Check Amount
-    const amountInKobo = (selectedTier?.rawPrice || 0) * 100
+    if (!formData.email || !formData.email.includes("@")) {
+        alert("Please enter a valid email address");
+        setIsProcessing(false);
+        return;
+    }
     if (amountInKobo <= 0) {
-      alert("Error: Invalid Ticket Price")
-      setIsProcessing(false)
-      return
+        alert("Error: Ticket price is invalid (0)");
+        setIsProcessing(false);
+        return;
     }
 
-    // Split name safely
     const names = formData.name.split(" ")
     const firstName = names[0] || "Guest"
     const lastName = names.slice(1).join(" ") || "."
 
-    // 3. Setup Paystack Config
     const paystackConfig = {
       key: publicKey,
       email: formData.email,
       amount: amountInKobo,
       currency: "NGN",
-      ref: "" + Math.floor(Math.random() * 1000000000 + 1), // Generate unique ref manually
+      ref: "" + Math.floor(Math.random() * 1000000000 + 1),
       metadata: {
         custom_fields: [
-          {
-            display_name: "Mobile Number",
-            variable_name: "mobile_number",
-            value: formData.phone,
-          },
-          {
-            display_name: "First Name",
-            variable_name: "first_name",
-            value: firstName,
-          },
-          {
-            display_name: "Last Name",
-            variable_name: "last_name",
-            value: lastName,
-          },
-          {
-            display_name: "Ticket Type",
-            variable_name: "ticket_type",
-            value: selectedTier?.name,
-          },
+          { display_name: "Phone", variable_name: "mobile_number", value: formData.phone },
+          { display_name: "Ticket", variable_name: "ticket_type", value: selectedTier?.name },
+          { display_name: "First Name", variable_name: "first_name", value: firstName },
+          { display_name: "Last Name", variable_name: "last_name", value: lastName },
         ],
       },
       callback: function (response: any) {
-        // PAYMENT SUCCESSFUL ON FRONTEND -> NOW VERIFY ON SERVER
+        // SERVER VERIFICATION
         fetch("/api/verify-payment", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -111,12 +103,13 @@ export function TicketsSection() {
                 ticket: selectedTier?.name || "",
               })
             } else {
-              alert("Payment Verification Failed. Please contact support.")
+              alert("Payment Verification Failed on Server.")
             }
           })
           .catch((err) => {
             console.error("Verification Error:", err)
-            alert("Network error verifying payment.")
+            // Fallback for demo if server is down:
+            // alert("Network error verifying payment.") 
           })
           .finally(() => {
             setIsProcessing(false)
@@ -124,17 +117,16 @@ export function TicketsSection() {
       },
       onClose: function () {
         setIsProcessing(false)
-        alert("Transaction was not completed, window closed.")
+        alert("Payment window closed.")
       },
     }
 
-    // 4. Initialize Paystack
     try {
       const handler = window.PaystackPop.setup(paystackConfig)
       handler.openIframe()
     } catch (error) {
       console.error("Paystack Init Error:", error)
-      alert("Could not load Paystack. Please refresh and try again.")
+      alert("Failed to load Paystack. Check internet connection.")
       setIsProcessing(false)
     }
   }
@@ -149,7 +141,7 @@ export function TicketsSection() {
     <section id="tickets" className="py-24 bg-background relative overflow-hidden">
       <Script src="https://js.paystack.co/v1/inline.js" strategy="lazyOnload" />
 
-      {/* Background decoration */}
+      {/* Decorations */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
 
@@ -163,13 +155,9 @@ export function TicketsSection() {
             Get Your <span className="text-primary">Ticket</span> Now!
           </h2>
           <p className="text-xl text-muted-foreground">Don&apos;t wait until it&apos;s sold out.</p>
-          <p className="text-muted-foreground mt-2 max-w-xl mx-auto">
-            Many people missed last year&apos;s event waiting until the last minute. Secure your spot today and be part
-            of bridging the gap.
-          </p>
         </div>
 
-        {/* Ticket Cards */}
+        {/* Cards */}
         <div className="grid md:grid-cols-3 gap-6 md:gap-8">
           {ticketTiers.map((tier, index) => (
             <Card
@@ -232,64 +220,59 @@ export function TicketsSection() {
                   {selectedTier?.price}.
                 </DialogDescription>
               </DialogHeader>
-              <form onSubmit={handlePayment}>
-                <div className="grid gap-4 py-4">
-                  <div className="grid gap-2">
-                    <Label htmlFor="name" className="text-foreground">
-                      Full Name
-                    </Label>
-                    <Input
-                      id="name"
-                      required
-                      className="bg-background border-border"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    />
-                  </div>
-                  <div className="grid gap-2">
-                    <Label htmlFor="email" className="text-foreground">
-                      Email Address
-                    </Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      required
-                      className="bg-background border-border"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    />
-                  </div>
-                  <div className="grid gap-2">
-                    <Label htmlFor="phone" className="text-foreground">
-                      Phone Number
-                    </Label>
-                    <Input
-                      id="phone"
-                      type="tel"
-                      required
-                      className="bg-background border-border"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    />
-                  </div>
+              
+              {/* REMOVED THE FORM TAG - JUST USE DIVs */}
+              <div className="grid gap-4 py-4">
+                <div className="grid gap-2">
+                  <Label htmlFor="name" className="text-foreground">Full Name</Label>
+                  <Input
+                    id="name"
+                    required
+                    className="bg-background border-border"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  />
                 </div>
-                <DialogFooter>
-                  <Button
-                    type="submit"
-                    className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
-                    disabled={isProcessing}
-                  >
-                    {isProcessing ? (
-                      <>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Processing...
-                      </>
-                    ) : (
-                      `Pay ${selectedTier?.price} via Paystack`
-                    )}
-                  </Button>
-                </DialogFooter>
-              </form>
+                <div className="grid gap-2">
+                  <Label htmlFor="email" className="text-foreground">Email Address</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    required
+                    className="bg-background border-border"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="phone" className="text-foreground">Phone Number</Label>
+                  <Input
+                    id="phone"
+                    type="tel"
+                    required
+                    className="bg-background border-border"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  />
+                </div>
+              </div>
+              <DialogFooter>
+                <Button
+                  onClick={handlePayment} // DIRECT CLICK HANDLER
+                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
+                  disabled={isProcessing}
+                >
+                  {isProcessing ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Processing...
+                    </>
+                  ) : (
+                    `Pay ${selectedTier?.price} via Paystack`
+                  )}
+                </Button>
+              </DialogFooter>
+              
             </>
           ) : (
             successData && (
