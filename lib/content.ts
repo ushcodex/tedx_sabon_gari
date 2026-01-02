@@ -187,20 +187,20 @@ export const team = [
 // - popular: Set to true for the "Most Popular" badge (only one should be true)
 // -----------------------------------------------------------------------------
 export const ticketTiers = [
-  {
-    name: "Promo",
-    price: "₦5,000",
-    rawPrice: 5000,
-    description: "Limited early access",
-    features: [
-      "General admission",
-      "Lunch & refreshments",
-      "Networking session",
-      "Event materials",
-      "Certificate",
-    ],
-    popular: false,
-  },
+// {
+//   name: "Promo",
+//    price: "₦5,000",
+//    rawPrice: 5000,
+//    description: "Limited early access",
+//    features: [
+//      "General admission",
+//      "Lunch & refreshments",
+//      "Networking session",
+//      "Event materials",
+//      "Certificate",
+//    ],
+//    popular: false,
+//  },
   {
     name: "Standard",
     price: "₦7,000",
