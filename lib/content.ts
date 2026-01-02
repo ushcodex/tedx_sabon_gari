@@ -93,13 +93,13 @@ export const speakers = [
     bio: "A trailblazing digital leader who has trained over 50,000 individuals in digital skills and innovation. Through partnerships with tech giants like Microsoft and Google, he's creating waves of transformation in education, business, and technology.",
     image: "/speaker/10.jpg",
   },
-  {
-    name: "Hon. Zubairu Mukhtar",
-    title: "Special Assistant to Deputy Governor of Kaduna State",
-    description: "Dynamic public administrator and policy strategist connecting government and communities.",
-    bio: "A dynamic public administrator and policy strategist with over a decade of experience in Nigeria's public service. Currently a Ph.D. student in Public Administration at ABU Zaria.",
-    image: "/speaker/11.jpg",
-  },
+{
+  name: "Mustapha Salihu Umar",
+  title: "Technical Assistance Coordinator, SABOU Capital",
+  description: "Ecosystem builder connecting policy, technology, and entrepreneurship across Nigeria.",
+  bio: "Mustapha serves as the Executive Director of the Northern Founders Community, where he drives cross-sector collaboration and high-growth startup ecosystems. With operational experience across Nigeria's 774 LGAs, he specializes in linking human potential with digital infrastructure. An alumnus of ABU Zaria, NUTM, and Quantic, and an Included VC Fellow, he's committed to empowering Africa’s next generation.",
+  image: "/speaker/11.jpg",
+}, 
   {
     name: "Salim Yunusa",
     title: "Founder, Poetic Wednesdays Initiative",
