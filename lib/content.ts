@@ -51,13 +51,13 @@ export const speakers = [
     bio: "An award-winning researcher and innovator passionate about sustainable engineering solutions and youth empowerment. With a Ph.D. in Civil & Environmental Engineering, he has authored over 28 publications. Founder of the ABU Energy Innovation Challenge.",
     image: "/speaker/1.jpg",
   },
-  {
-    name: "Hajiya Adama Haruna Abdulmalik",
-    title: "Northern Regional Coordinator, AJoke Ayisat Afolabi Foundation",
-    description: "Dynamic development practitioner and gender advocate dedicated to social justice.",
-    bio: "A dynamic development practitioner and gender advocate dedicated to social justice, women's inclusion, and grassroots transformation in Northern Nigeria. She champions the rights of marginalized communities.",
-    image: "/speaker/2.jpg",
-  },
+{
+  name: "Zainab Nasirudeen Yakubu",
+  title: "Co-founder, Gurd Grains",
+  description: "Young tech entrepreneur pioneering AI-powered solutions in agriculture.",
+  bio: "Zainab Nasirudeen Yakubu is a young tech entrepreneur and JSS 1 student of Albany Science International Academy. She co-founded Gurd Grains, which is building an AI-powered mat drying technology for agriculture. A TechCamp 25 alumna, TEDxFCE Zaria 2022 co-speaker, and GITEX UAE 2022 visitor, Zainab is proof that age is no barrier to innovation.",
+  image: "/speaker/2.jpg",
+}, 
   {
     name: "Abdulhaleem Ishaq Ringim",
     title: "Special Assistant to Governor of Kaduna State on Economic Matters",
