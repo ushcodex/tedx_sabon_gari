@@ -201,36 +201,36 @@ export const ticketTiers = [
 //    ],
 //    popular: false,
 //  },
-  {
-    name: "Standard",
-    price: "₦7,000",
-    rawPrice: 7000,
-    description: "Full event access",
-    features: [
-      "General admission",
-      "Lunch & refreshments",
-      "Networking session",
-      "Event materials",
-      "Certificate",
-    ],
-    popular: true,
-  },
-  {
-    name: "VIP",
-    price: "₦10,000",
-    rawPrice: 10000,
-    description: "Premium experience",
-    features: [
-      "VIP seating",
-      "Premium lunch",
-      "Exclusive networking",
-      "Event materials",
-      "Certificate",
-      "Meet & greet with speakers",
-    ],
-    popular: false,
-  },
-]
+//  {
+//    name: "Standard",
+//    price: "₦7,000",
+//    rawPrice: 7000,
+//    description: "Full event access",
+//    features: [
+//      "General admission",
+//      "Lunch & refreshments",
+//      "Networking session",
+//      "Event materials",
+//      "Certificate",
+//    ],
+//    popular: true,
+//  },
+//  {
+//    name: "VIP",
+//    price: "₦10,000",
+//    rawPrice: 10000,
+//    description: "Premium experience",
+//    features: [
+//      "VIP seating",
+//      "Premium lunch",
+//      "Exclusive networking",
+//      "Event materials",
+//      "Certificate",
+//      "Meet & greet with speakers",
+//    ],
+//    popular: false,
+//  },
+ ]
 
 // -----------------------------------------------------------------------------
 // SPONSORS / PARTNERS
